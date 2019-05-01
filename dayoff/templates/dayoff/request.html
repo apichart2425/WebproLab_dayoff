@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>request_form</title>
+    <style>
+        .errorlist{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+{#    {{ form.as_p }}#}
+    <p>
+        <label for="">เนื่องจาก:</label>
+        <p>{{ form.reason.errors }}{{ form.reason }}</p>
+    </p>
+    <p>
+        <label for="">ประเภท:</label>
+        <p>{{ form.type.errors }}{{ form.type }}</p>
+
+    </p>
+    <p>
+        <label for="">ตั้งแต่วันที่:</label>
+        <p>{{ form.date_start.errors }}{{ form.date_start }}</p>
+
+
+    </p>
+    <p>
+        <label for="">ถึงวันที่:</label>
+         <p>{{ form.date_end.errors }}{{ form.date_end }}</p>
+
+
+    </p>
+    <input type="submit" value="ส่ง"/>
+</form>
+</body>
+</html>

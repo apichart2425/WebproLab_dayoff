@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container my-5">
+        <h1>รายการคำขอลางาน</h1>
+        <table class="table">
+        <tr>
+            <td style="width: 90px;">ประเภท</td>
+            <td style="width: 250px;">สาเหตุ</td>
+            <td style="width: 120px;">ตั้งแต่วันที่</td>
+            <td style="width: 120px;">ถึงวันที่</td>
+            <td style="width: 120px;">สถานะ</td>
+        </tr>
+        {% for form in formset %}
+            <tr>
+                <td>{{ form.type.value }}</td>
+                <td>{{ form.reason.value }}</td>
+                <td>{{ form.date_start.value }}</td>
+                <td>{{ form.date_end.value }}</td>
+                {% if form.approve_status.value == "อนุมัติ" %}
+                    <td><button type="button" class="btn btn-success status btn-sm">{{ form.approve_status.value }}</button></td>
+                    {% elif form.approve_status.value == "รอการอนุมัติ" %}
+                    <td><button type="button" class="btn btn-secondary status btn-sm">{{ form.approve_status.value }}</button></td>
+                    {% elif form.approve_status.value == "ไม่อนุมัติ" %}
+                    <td><button type="button" class="btn btn-danger status btn-sm">{{ form.approve_status.value }}</button></td>
+                {% endif %}
+    {#            <td>{{ form.approve_status.value }}</td>#}
+            </tr>
+        {% endfor %}
+        </table>
+        <button type="button" class="btn btn-primary btn-lg"><a style="color: white;" href="{% url 'request' %}">ยื่นคำขอลางาน</a></button>
+        <a class="btn btn-primary btn-lg" href="{% url 'logout' %}">LOGOUT</a>
+    </div>
+</body>
+</html>
